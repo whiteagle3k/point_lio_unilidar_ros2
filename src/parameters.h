@@ -1,7 +1,5 @@
-// #ifndef PARAM_H
-// #define PARAM_H
 #pragma once
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 #include <Eigen/Eigen>
 #include <Eigen/Core>
 #include <cstring>
@@ -34,7 +32,7 @@ extern std::vector<double> extrinT;
 extern std::vector<double> extrinR;
 extern bool   runtime_pos_log, pcd_save_en, path_en;
 extern bool   scan_pub_en, scan_body_pub_en;
-extern shared_ptr<Preprocess> p_pre;
+extern std::shared_ptr<Preprocess> p_pre;
 extern double time_lag_imu_to_lidar;
 
-void readParameters(ros::NodeHandle &n);
+void readParameters(std::shared_ptr<rclcpp::Node> node);

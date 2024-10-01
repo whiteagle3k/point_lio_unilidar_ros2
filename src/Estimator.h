@@ -1,5 +1,5 @@
-#ifndef Estimator_H
-#define Estimator_H
+#ifndef ESTIMATOR_H
+#define ESTIMATOR_H
 
 #include <../include/IKFoM/IKFoM_toolkit/esekfom/esekfom.hpp>
 #include "common_lib.h"
@@ -36,47 +36,47 @@ typedef MTK::vect<1, double> vect1;
 typedef MTK::vect<2, double> vect2;
 
 MTK_BUILD_MANIFOLD(state_input,
-((vect3, pos))
-((SO3, rot))
-((SO3, offset_R_L_I))
-((vect3, offset_T_L_I))
-((vect3, vel))
-((vect3, bg))
-((vect3, ba))
-((vect3, gravity))
+    ((vect3, pos))
+    ((SO3, rot))
+    ((SO3, offset_R_L_I))
+    ((vect3, offset_T_L_I))
+    ((vect3, vel))
+    ((vect3, bg))
+    ((vect3, ba))
+    ((vect3, gravity))
 );
 
 MTK_BUILD_MANIFOLD(state_output,
-((vect3, pos))
-((SO3, rot))
-((SO3, offset_R_L_I))
-((vect3, offset_T_L_I))
-((vect3, vel))
-((vect3, omg))
-((vect3, acc))
-((vect3, gravity))
-((vect3, bg))
-((vect3, ba))
+    ((vect3, pos))
+    ((SO3, rot))
+    ((SO3, offset_R_L_I))
+    ((vect3, offset_T_L_I))
+    ((vect3, vel))
+    ((vect3, omg))
+    ((vect3, acc))
+    ((vect3, gravity))
+    ((vect3, bg))
+    ((vect3, ba))
 );
 
 MTK_BUILD_MANIFOLD(input_ikfom,
-((vect3, acc))
-((vect3, gyro))
+    ((vect3, acc))
+    ((vect3, gyro))
 );
 
 MTK_BUILD_MANIFOLD(process_noise_input,
-((vect3, ng))
-((vect3, na))
-((vect3, nbg))
-((vect3, nba))
+    ((vect3, ng))
+    ((vect3, na))
+    ((vect3, nbg))
+    ((vect3, nba))
 );
 
 MTK_BUILD_MANIFOLD(process_noise_output,
-((vect3, vel))
-((vect3, ng))
-((vect3, na))
-((vect3, nbg))
-((vect3, nba))
+    ((vect3, vel))
+    ((vect3, ng))
+    ((vect3, na))
+    ((vect3, nbg))
+    ((vect3, nba))
 );
 
 extern esekfom::esekf<state_input, 24, input_ikfom> kf_input;
@@ -89,19 +89,16 @@ Eigen::Matrix<double, 24, 24> process_noise_cov_input();
 
 Eigen::Matrix<double, 30, 30> process_noise_cov_output();
 
-//double L_offset_to_I[3] = {0.04165, 0.02326, -0.0284}; // Avia 
-//vect3 Lidar_offset_to_IMU(L_offset_to_I, 3);
+// double L_offset_to_I[3] = {0.04165, 0.02326, -0.0284}; // Avia 
+// vect3 Lidar_offset_to_IMU(L_offset_to_I, 3);
+
 Eigen::Matrix<double, 24, 1> get_f_input(state_input &s, const input_ikfom &in);
 
 Eigen::Matrix<double, 30, 1> get_f_output(state_output &s, const input_ikfom &in);
 
 Eigen::Matrix<double, 24, 24> df_dx_input(state_input &s, const input_ikfom &in);
 
-// Eigen::Matrix<double, 24, 12> df_dw_input(state_input &s, const input_ikfom &in);
-
 Eigen::Matrix<double, 30, 30> df_dx_output(state_output &s, const input_ikfom &in);
-
-// Eigen::Matrix<double, 30, 15> df_dw_output(state_output &s);
 
 vect3 SO3ToEuler(const SO3 &orient);
 
@@ -111,8 +108,8 @@ void h_model_output(state_output &s, esekfom::dyn_share_modified<double> &ekfom_
 
 void h_model_IMU_output(state_output &s, esekfom::dyn_share_modified<double> &ekfom_data);
 
-void pointBodyToWorld(PointType const * const pi, PointType * const po);
+void pointBodyToWorld(const PointType *const pi, PointType *const po);
 
-const bool time_list(PointType &x, PointType &y); // {return (x.curvature < y.curvature);};
+bool time_list(const PointType &x, const PointType &y); // {return (x.curvature < y.curvature);};
 
-#endif
+#endif // ESTIMATOR_H

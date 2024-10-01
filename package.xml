@@ -1,47 +1,44 @@
 <?xml version="1.0"?>
-<package>
+<package format="3">
   <name>point_lio_unilidar</name>
   <version>0.0.0</version>
-
   <description>
     This is a modified version of LOAM which is original algorithm
     is described in the following paper:
     J. Zhang and S. Singh. LOAM: Lidar Odometry and Mapping in Real-time.
-      Robotics: Science and Systems Conference (RSS). Berkeley, CA, July 2014.
+    Robotics: Science and Systems Conference (RSS). Berkeley, CA, July 2014.
+
+    Note: Migrated to ROS2 by Igor Antonov
   </description>
 
-  <maintainer email="lukelbmeng@gmail.com">Lingbo Meng</maintainer>
+  <maintainer email="whiteagle3k@gmail.com">Igor Antonov</maintainer>
+  <author email="lukelbmeng@gmail.com">Lingbo Meng</author>
 
   <license>BSD</license>
 
-  <author email="lukelbmeng@gmail.com">Lingbo Meng</author>
-  
-  <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>geometry_msgs</build_depend>
-  <build_depend>nav_msgs</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>rospy</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>sensor_msgs</build_depend>
-  <build_depend>tf</build_depend>
-  <build_depend>pcl_ros</build_depend>
-  <!-- <build_depend>livox_ros_driver</build_depend> -->
-  <build_depend>message_generation</build_depend>
+  <!-- Build tool dependencies -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>nav_msgs</run_depend>
-  <run_depend>sensor_msgs</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>rospy</run_depend>
-  <run_depend>std_msgs</run_depend>
-  <run_depend>tf</run_depend>
-  <run_depend>pcl_ros</run_depend>
-  <!-- <run_depend>livox_ros_driver</run_depend> -->
-  <run_depend>message_runtime</run_depend>
+  <!-- Common dependencies -->
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>pcl_conversions</depend>
+  <depend>pcl_msgs</depend>
+  <depend>pcl_ros</depend>
+  <depend>eigen3_cmake_module</depend>
+  <depend>tf2_eigen</depend>
+  <!-- Uncomment if using Livox LiDAR driver -->
+  <!-- <depend>livox_ros_driver</depend> -->
 
-  <test_depend>rostest</test_depend>
-  <test_depend>rosbag</test_depend>
+  <!-- Test dependencies -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
   <export>
+    <!-- Other tools can request additional information be placed here -->
   </export>
 </package>
